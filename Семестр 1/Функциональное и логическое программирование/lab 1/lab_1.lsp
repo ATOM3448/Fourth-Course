@@ -80,5 +80,5 @@
 )
 
 ; Вызов функции и вывод результата
-;(print (grouping input_values))
-(print (grouping (read)))
+(print (grouping input_values))
+;(print (grouping (read)))
