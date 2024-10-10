@@ -1,0 +1,5 @@
+rootProject.name = 'IS'
+include 'lab2'
+include 'lab2'
+include 'lab1'
+
