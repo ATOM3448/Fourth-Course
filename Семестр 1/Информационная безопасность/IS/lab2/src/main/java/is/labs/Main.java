@@ -1,27 +1,85 @@
 package is.labs;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.util.ArrayList;
+
 public class Main {
     public static void main(String[] args) {
-        int[] input = {0x69, 0x6E, 0x63, 0x6F, 0x6D, 0x70, 0x72, 0x65, 0x68, 0x65, 0x6E, 0x73, 0x69, 0x62, 0x6C, 0x65};
-        int[][] key = {
-                {0x00, 0x04, 0x08, 0x0C},
-                {0x01, 0x05, 0x09, 0x0D},
-                {0x02, 0x06, 0x0A, 0x0E},
-                {0x03, 0x07, 0x0B, 0x0F}
-        };
+        ArrayList<Integer> input = new ArrayList<Integer>();
+        int[][] key = new int[4][4];
+
+        try (FileInputStream in = new FileInputStream("lab2/src/main/resources/text")){
+            int buf =  in.read();
+            do {
+                input.add(buf);
+            } while ((buf = in.read()) != -1);
+        } catch (Exception ex){
+            System.err.println("Ошибка чтения файла ввода");
+            return;
+        }
+
+        try (FileInputStream in = new FileInputStream("lab2/src/main/resources/key")){
+            int ind = 0;
+            int buf = in.read();
+            do {
+                key[ind%4][ind/4] = buf;
+                ind++;
+            } while ((buf = in.read()) != -1);
+        } catch (Exception ex){
+            System.err.println("Ошибка чтения файла ключа");
+            System.err.println(ex.getMessage());
+            return;
+        }
 
         AES aes = new AES();
+        boolean append = false;
 
-        int[] encrypted = aes.encrypt(input, key);
+        for (int ind = 0; ind < input.size(); ind += 16){
+            int[] part = new int[16];
+            for (int i = 0; i < 16; i++){
+                if ((ind+i) >= input.size()){
+                    part[i] = 0;
+                    continue;
+                }
+                part[i] = input.get(ind+i);
+            }
 
-        /*for (int i : encrypted){
-            System.out.println(Integer.toHexString(i));
-        }*/
+            int[] encrypted = aes.encrypt(part, key);
+            int[] decrypted = aes.decrypt(encrypted, key);
 
-        int[] decrypted = aes.decrypt(encrypted, key);
+            try (FileWriter out = new FileWriter("lab2/src/main/resources/encrypted_hex", append)){
+                for (int i:encrypted){
+                    out.write(Integer.toHexString(i));
+                    out.write(" ");
+                }
+            } catch (Exception ex){
+                System.err.println("Ошибка записи файла зашифрованного файла в hex");
+                return;
+            }
 
-        for (int i : decrypted){
-            System.out.println(Integer.toHexString(i));
+            try (FileOutputStream out = new FileOutputStream("lab2/src/main/resources/encrypted", append)){
+                for (int i:encrypted){
+                    out.write(i);
+                }
+            } catch (Exception ex){
+                System.err.println("Ошибка записи зашифрованного файла");
+                return;
+            }
+
+            try (FileOutputStream out = new FileOutputStream("lab2/src/main/resources/decrypted", append)){
+                for (int i:decrypted){
+                    if(i==0){
+                        break;
+                    }
+                    out.write(i);
+                }
+            } catch (Exception ex){
+                System.err.println("Ошибка записи файла расшифровки");
+                return;
+            }
+            append = true;
         }
     }
 }

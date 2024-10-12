@@ -101,16 +101,16 @@ public class AES {
     }
 
     /**
-     * XOR {@code state} с {@code key}
+     * XOR {@code state} с {@code w}
      *
      * @param state Значение
-     * @param key   Ключ
-     * @return {@code state} XOR {@code key}
+     * @param w   Ключ
+     * @return {@code state} XOR {@code w}
      */
-    private int[][] addRoundKey(int[][] state, int[][] key) {
+    private int[][] addRoundKey(int[][] state, int[][] w, int round) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++)
-                state[i][j] ^= key[i][j];
+                state[i][j] ^= w[i][(round*4) + j];
         }
 
         return state;
@@ -186,42 +186,44 @@ public class AES {
     }
 
     /**
-     * Преобразует ключ
+     * Выдает набор ключей для раундов шифрования
      *
      * @param key   Исходный ключ
-     * @param round Номер раунда ключа
-     * @return Ключ раунда
+     * @return Ключи раунда
      */
-    private int[][] keyExpansion(int[][] key, int round) {
-        int[][] res = new int[4][4];
+    private int[][] keyExpansion(int[][] key) {
+        int[][] w = new int[4][4*11];
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                res[i][j] = key[i][j];
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                w[i][j] = key[i][j];
             }
         }
 
-        int buf = key[0][3];
-        for (int i = 3; i >= 0; i--) {
-            int buf1 = key[i][3];
-            key[i][3] = buf;
-            buf = buf1;
-        }
+        for (int j = 4; j < (4*11); j++){
+            if (j % 4 == 0){
+                int buf = w[0][j-1];
+                for (int i = 3; i >= 0; i--){
+                    int buf1 = w[i][j-1];
+                    w[i][j] = buf;
+                    buf = buf1;
+                }
 
-        for (int i = 0; i < 4; i++) {
-            key[i][3] = s_box[key[i][3] >>> 4][key[i][3] % 16];
-        }
+                for (int i = 0; i < 4; i++){
+                    w[i][j] = s_box[w[i][j] >>> 4][w[i][j] % 16];
+                }
 
-        for (int i = 0; i < 4; i++) {
-            res[i][0] ^= key[i][3] ^ rcon[round][i];
-        }
-        for (int j = 1; j < 4; j++) {
-            for (int i = 0; i < 4; i++) {
-                res[i][j] ^= res[i][j - 1];
+                for (int i = 0; i < 4; i++){
+                    w[i][j] = w[i][j-4] ^ w[i][j] ^ rcon[j/4][i];
+                }
+                continue;
+            }
+            for (int i = 0; i < 4; i++){
+                w[i][j] = w[i][j-1] ^ w[i][j-4];
             }
         }
 
-        return res;
+        return w;
     }
 
     /**
@@ -242,6 +244,27 @@ public class AES {
         return output;
     }
 
+    private void printKeys(int[][] w){
+        for (int round = 0; round < 11; round++){
+            System.out.print(round + ":\n\t");
+            for (int j = round*4; j < ((round+1)*4); j++){
+                for (int i = 0; i < 4; i++){
+                    System.out.print(Integer.toHexString(w[i][j]) + " ");
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    private void printRound(int[][] value){
+        for (int j = 0; j < 4; j++){
+            for (int i = 0; i < 4; i++){
+                System.out.print(Integer.toHexString(value[i][j]) + " ");
+            }
+        }
+        System.out.println();
+    }
+
     /**
      * Шифрует переданный {@code input} с использованием {@code key}
      *
@@ -251,22 +274,19 @@ public class AES {
      */
     public int[] encrypt(int[] input, int[][] key) {
         int[][] state = stateMaker(input);
-        state = addRoundKey(state, key);
+        int[][] w = keyExpansion(key);
+        state = addRoundKey(state, w, 0);
 
         for (int round = 1; round < 10; round++) {
             state = subBytes(state);
             state = shiftRows(state);
             state = mixColumns(state);
-
-            key = keyExpansion(key, round);
-
-            state = addRoundKey(state, key);
+            state = addRoundKey(state, w, round);
         }
 
         state = subBytes(state);
         state = shiftRows(state);
-        key = keyExpansion(key, 10);
-        state = addRoundKey(state, key);
+        state = addRoundKey(state, w, 10);
 
         return outputMaker(state);
     }
@@ -346,23 +366,20 @@ public class AES {
      */
     public int[] decrypt(int[] input, int[][] key) {
         int[][] state = stateMaker(input);
-        state = addRoundKey(state, key);
+        int[][] w = keyExpansion(key);
 
-        for (int round = 9; round > 1; round--) {
+        state = addRoundKey(state, w, 10);
+
+        for (int round = 9; round > 0; round--) {
             state = invShiftRows(state);
             state = invSubBytes(state);
-
-            key = keyExpansion(key, round);
-
-            state = addRoundKey(state, key);
-
+            state = addRoundKey(state, w, round);
             state = invMixColumns(state);
         }
 
         state = invShiftRows(state);
         state = invSubBytes(state);
-        key = keyExpansion(key, 10);
-        state = addRoundKey(state, key);
+        state = addRoundKey(state, w, 0);
 
         return outputMaker(state);
     }
