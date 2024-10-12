@@ -65,14 +65,21 @@ public class AES {
     /**
      * Матрица для {@code mixColumns}
      */
-    private static final int[][] thisMatrix = {
+    private static final int[][] MDS = {
             {0x02, 0x03, 0x01, 0x01},
             {0x01, 0x02, 0x03, 0x01},
             {0x01, 0x01, 0x02, 0x03},
-            {0x03, 0x01, 0x01, 0x02}modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+            {0x03, 0x01, 0x01, 0x02}
+    };
+
+    /**
+     * Матрица для {@code invMixColumns}
+     */
+    private static final int[][] invMDS = {
+            {0x0E, 0x0B, 0x0D, 0x09},
+            {0x09, 0x0E, 0x0B, 0x0D},
+            {0x0D, 0x09, 0x0E, 0x0B},
+            {0x0B, 0x0D, 0x09, 0x0E}
     };
 
     /**
@@ -110,33 +117,16 @@ public class AES {
     }
 
     /**
-     * Заменяет значения строки на значения из таблицы s_box
-     *
-     * @param value Какие значения заменяются
-     * @return Переставленные значения
-     */
-    private int[] subBytesRow(int[] value) {
-        for (int i = 0; i < 4; i++) {
-            char[] tableIndexes = Integer.toHexString(value[i]).toCharArray();
-            if (tableIndexes.length == 2) {
-                value[i] = s_box[Integer.parseInt(String.valueOf(tableIndexes[0]), 16)][Integer.parseInt(String.valueOf(tableIndexes[1]), 16)];
-            } else {
-                value[i] = s_box[0][Integer.parseInt(String.valueOf(tableIndexes[0]), 16)];
-            }
-        }
-
-        return value;
-    }
-
-    /**
      * Заменяет значения матрицы на значения из таблицы s_box
      *
      * @param value Какие значения заменяются
      * @return Переставленные значения
      */
-    private int[][] subBytesMatrix(int[][] value) {
+    private int[][] subBytes(int[][] value) {
         for (int i = 0; i < 4; i++) {
-            value[i] = subBytesRow(value[i]);
+            for (int j = 0; j < 4; j++) {
+                value[i][j] = s_box[value[i][j] >>> 4][value[i][j] % 16];
+            }
         }
 
         return value;
@@ -145,8 +135,8 @@ public class AES {
     /**
      * Смещает строки в матрице
      *
-     * @param value массив в котором смещаются строки
-     * @return массив со смещенными строками
+     * @param value Массив в котором смещаются строки
+     * @return Массив со смещенными строками
      */
     private int[][] shiftRows(int[][] value) {
         int[][] result = new int[4][4];
@@ -161,14 +151,15 @@ public class AES {
     }
 
     /**
-     * Умножает {@code thisMatrix} на {@code values}.
+     * Умножает {@code MDS} на {@code values}.
      * <p>
      * Вместо сложения XOR.
      * <p>
      * Вместо умножения - разбиение бинарных чисел на полиномы и перемножение полиномов... в теории.
      * По сути, на примере умножения на 03: {@code (число << 1) XOR (число << 0)} упрощаем
      * {@code (число << 1) XOR число}
-     * @param values матрица на которую умножаем
+     *
+     * @param values Матрица на которую умножаем
      * @return Результат перемножения
      */
     private int[][] mixColumns(int[][] values) {
@@ -176,23 +167,61 @@ public class AES {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                result[i][j] = 0;
+                result[j][i] = 0;
                 for (int k = 0; k < 4; k++) {
-                    if ((thisMatrix[j][k] % 2) != 0){
-                        result[i][j] ^= values[k][i];
+                    if ((MDS[j][k] % 2) != 0){
+                        result[j][i] ^= values[k][i];
                     }
-                    if (thisMatrix[j][k] > 1){
-                        result[i][j] ^= (values[k][i]<<1);
+                    if (MDS[j][k] > 1){
+                        result[j][i] ^= (values[k][i] << 1);
                     }
                 }
-
-                if (result[i][j] > 255) {
-                    result[i][j] ^= 283; //res ^ 100011011
+                if (result[j][i] > 255) {
+                    result[j][i] ^= 283;//res ^ 100011011
                 }
             }
         }
 
         return result;
+    }
+
+    /**
+     * Преобразует ключ
+     *
+     * @param key   Исходный ключ
+     * @param round Номер раунда ключа
+     * @return Ключ раунда
+     */
+    private int[][] keyExpansion(int[][] key, int round) {
+        int[][] res = new int[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                res[i][j] = key[i][j];
+            }
+        }
+
+        int buf = key[0][3];
+        for (int i = 3; i >= 0; i--) {
+            int buf1 = key[i][3];
+            key[i][3] = buf;
+            buf = buf1;
+        }
+
+        for (int i = 0; i < 4; i++) {
+            key[i][3] = s_box[key[i][3] >>> 4][key[i][3] % 16];
+        }
+
+        for (int i = 0; i < 4; i++) {
+            res[i][0] ^= key[i][3] ^ rcon[round][i];
+        }
+        for (int j = 1; j < 4; j++) {
+            for (int i = 0; i < 4; i++) {
+                res[i][j] ^= res[i][j - 1];
+            }
+        }
+
+        return res;
     }
 
     /**
@@ -225,30 +254,116 @@ public class AES {
         state = addRoundKey(state, key);
 
         for (int round = 1; round < 10; round++) {
-            state = subBytesMatrix(state);
+            state = subBytes(state);
             state = shiftRows(state);
             state = mixColumns(state);
 
+            key = keyExpansion(key, round);
 
-            // Удалить
-            System.out.println();
-            print(state);
-            return outputMaker(state);
+            state = addRoundKey(state, key);
         }
+
+        state = subBytes(state);
+        state = shiftRows(state);
+        key = keyExpansion(key, 10);
+        state = addRoundKey(state, key);
 
         return outputMaker(state);
     }
 
-    // Удалить
-    private void print(int[][] value) {
+    /**
+     * Обратное к {@code shiftRows}
+     *
+     * @param value Массив в котором смещаются строки
+     * @return Массив со смещенными строками
+     */
+    private int[][] invShiftRows(int[][] value) {
+        int[][] result = new int[4][4];
+
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                System.out.println(Integer.toHexString(value[i][j]));
+                result[i][j] = value[i][(j+(4-i))%4];
             }
         }
+
+        return result;
     }
 
+    /**
+     * Обработное к {@code subBytes}
+     *
+     * @param value Какие значения заменяются
+     * @return Переставленные значения
+     */
+    private int[][] invSubBytes(int[][] value) {
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                value[i][j] = inv_s_box[value[i][j] >>> 4][value[i][j] % 16];
+            }
+        }
+
+        return value;
+    }
+
+    /**
+     * Обратная к {@code mixColumns}
+     *
+     * @param values Матрица на которую умножаем
+     * @return Результат перемножения
+     */
+    private int[][] invMixColumns(int[][] values) {
+        int[][] result = new int[4][4];
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                result[j][i] = 0;
+                for (int k = 0; k < 4; k++) {
+                    int power = -1;
+                    for (char value :new StringBuilder(Integer.toBinaryString(invMDS[j][k])).reverse().toString().toCharArray()){
+                        power += 1;
+                        if (value != '0'){
+                            result[j][i] ^= (values[k][i] << power);
+                        }
+                    }
+                }
+
+                for (int c = 3; c >= 0; c--){
+                    if (result[j][i] >= (256 << c)) {
+                        result[j][i] ^= (283 << c);//res ^ 100011011 << c
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Расшифрование {@code input}
+     * @param input Что расшифровать
+     * @param key Ключ шифрования
+     * @return Расшифрованные значения
+     */
     public int[] decrypt(int[] input, int[][] key) {
-        return null;
+        int[][] state = stateMaker(input);
+        state = addRoundKey(state, key);
+
+        for (int round = 9; round > 1; round--) {
+            state = invShiftRows(state);
+            state = invSubBytes(state);
+
+            key = keyExpansion(key, round);
+
+            state = addRoundKey(state, key);
+
+            state = invMixColumns(state);
+        }
+
+        state = invShiftRows(state);
+        state = invSubBytes(state);
+        key = keyExpansion(key, 10);
+        state = addRoundKey(state, key);
+
+        return outputMaker(state);
     }
 }

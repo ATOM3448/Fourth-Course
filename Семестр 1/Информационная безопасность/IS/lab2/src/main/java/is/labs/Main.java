@@ -13,6 +13,15 @@ public class Main {
         AES aes = new AES();
 
         int[] encrypted = aes.encrypt(input, key);
+
+        /*for (int i : encrypted){
+            System.out.println(Integer.toHexString(i));
+        }*/
+
         int[] decrypted = aes.decrypt(encrypted, key);
+
+        for (int i : decrypted){
+            System.out.println(Integer.toHexString(i));
+        }
     }
 }
