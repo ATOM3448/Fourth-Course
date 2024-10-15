@@ -104,13 +104,13 @@ public class AES {
      * XOR {@code state} с {@code w}
      *
      * @param state Значение
-     * @param w   Ключ
+     * @param w     Ключ
      * @return {@code state} XOR {@code w}
      */
     private int[][] addRoundKey(int[][] state, int[][] w, int round) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++)
-                state[i][j] ^= w[i][(round*4) + j];
+                state[i][j] ^= w[i][(round * 4) + j];
         }
 
         return state;
@@ -169,10 +169,10 @@ public class AES {
             for (int j = 0; j < 4; j++) {
                 result[j][i] = 0;
                 for (int k = 0; k < 4; k++) {
-                    if ((MDS[j][k] % 2) != 0){
+                    if ((MDS[j][k] % 2) != 0) {
                         result[j][i] ^= values[k][i];
                     }
-                    if (MDS[j][k] > 1){
+                    if (MDS[j][k] > 1) {
                         result[j][i] ^= (values[k][i] << 1);
                     }
                 }
@@ -188,38 +188,36 @@ public class AES {
     /**
      * Выдает набор ключей для раундов шифрования
      *
-     * @param key   Исходный ключ
+     * @param key Исходный ключ
      * @return Ключи раунда
      */
     private int[][] keyExpansion(int[][] key) {
-        int[][] w = new int[4][4*11];
+        int[][] w = new int[4][4 * 11];
 
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                w[i][j] = key[i][j];
-            }
+        for (int i = 0; i < 4; i++) {
+            System.arraycopy(key[i], 0, w[i], 0, 4);
         }
 
-        for (int j = 4; j < (4*11); j++){
-            if (j % 4 == 0){
-                int buf = w[0][j-1];
-                for (int i = 3; i >= 0; i--){
-                    int buf1 = w[i][j-1];
+        for (int j = 4; j < (4 * 11); j++) {
+            if (j % 4 == 0) {
+                int buf = w[0][j - 1];
+                for (int i = 3; i >= 0; i--) {
+                    int buf1 = w[i][j - 1];
                     w[i][j] = buf;
                     buf = buf1;
                 }
 
-                for (int i = 0; i < 4; i++){
+                for (int i = 0; i < 4; i++) {
                     w[i][j] = s_box[w[i][j] >>> 4][w[i][j] % 16];
                 }
 
-                for (int i = 0; i < 4; i++){
-                    w[i][j] = w[i][j-4] ^ w[i][j] ^ rcon[j/4][i];
+                for (int i = 0; i < 4; i++) {
+                    w[i][j] = w[i][j - 4] ^ w[i][j] ^ rcon[j / 4][i];
                 }
                 continue;
             }
-            for (int i = 0; i < 4; i++){
-                w[i][j] = w[i][j-1] ^ w[i][j-4];
+            for (int i = 0; i < 4; i++) {
+                w[i][j] = w[i][j - 1] ^ w[i][j - 4];
             }
         }
 
@@ -242,27 +240,6 @@ public class AES {
         }
 
         return output;
-    }
-
-    private void printKeys(int[][] w){
-        for (int round = 0; round < 11; round++){
-            System.out.print(round + ":\n\t");
-            for (int j = round*4; j < ((round+1)*4); j++){
-                for (int i = 0; i < 4; i++){
-                    System.out.print(Integer.toHexString(w[i][j]) + " ");
-                }
-            }
-            System.out.println();
-        }
-    }
-
-    private void printRound(int[][] value){
-        for (int j = 0; j < 4; j++){
-            for (int i = 0; i < 4; i++){
-                System.out.print(Integer.toHexString(value[i][j]) + " ");
-            }
-        }
-        System.out.println();
     }
 
     /**
@@ -302,7 +279,7 @@ public class AES {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                result[i][j] = value[i][(j+(4-i))%4];
+                result[i][j] = value[i][(j + (4 - i)) % 4];
             }
         }
 
@@ -339,15 +316,15 @@ public class AES {
                 result[j][i] = 0;
                 for (int k = 0; k < 4; k++) {
                     int power = -1;
-                    for (char value :new StringBuilder(Integer.toBinaryString(invMDS[j][k])).reverse().toString().toCharArray()){
+                    for (char value : new StringBuilder(Integer.toBinaryString(invMDS[j][k])).reverse().toString().toCharArray()) {
                         power += 1;
-                        if (value != '0'){
+                        if (value != '0') {
                             result[j][i] ^= (values[k][i] << power);
                         }
                     }
                 }
 
-                for (int c = 3; c >= 0; c--){
+                for (int c = 3; c >= 0; c--) {
                     if (result[j][i] >= (256 << c)) {
                         result[j][i] ^= (283 << c);//res ^ 100011011 << c
                     }
@@ -360,8 +337,9 @@ public class AES {
 
     /**
      * Расшифрование {@code input}
+     *
      * @param input Что расшифровать
-     * @param key Ключ шифрования
+     * @param key   Ключ шифрования
      * @return Расшифрованные значения
      */
     public int[] decrypt(int[] input, int[][] key) {
