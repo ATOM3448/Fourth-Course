@@ -9,6 +9,34 @@
 нравиться женщинам.
 */
 
-mans
+woman(мэри).
+woman(анна).
 
-womans
+man(джон).
+man(дик).
+
+lovely(мери).
+
+kind(джон).
+kind(анна).
+
+manly(джон).
+
+strong(джон).
+
+rich(дик).
+
+manLikes(X) :- woman(X),kind(X).
+
+womanLike(X, Y) :- man(X),kind(X),(manLikes(Y);strong(X)).
+
+anyWomanLike(X, [H|T]) :- womanLike(X, H);anyWomanLike(X, T).
+
+happy(X) :- man(X),(rich(X);anyWomanLike(X, [анна, мэри])).
+
+whoWomansLike([H|T], X) :- 
+    (anyWomanLike(H, X) -> print(H));
+    whoWomansLike(T, X).
+
+%happy(джон).
+%whoWomansLike([джон, дик], [мэри, анна]).
