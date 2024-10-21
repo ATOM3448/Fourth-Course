@@ -15,7 +15,7 @@ woman(анна).
 man(джон).
 man(дик).
 
-lovely(мери).
+lovely(мэри).
 
 kind(джон).
 kind(анна).
@@ -26,17 +26,11 @@ strong(джон).
 
 rich(дик).
 
-manLikes(X) :- woman(X),kind(X).
+manLikes(X) :- woman(X),lovely(X).
 
 womanLike(X, Y) :- man(X),kind(X),(manLikes(Y);strong(X)).
 
-anyWomanLike(X, [H|T]) :- womanLike(X, H);anyWomanLike(X, T).
+happy(X) :- man(X),(rich(X);womanLike(X, _)).
 
-happy(X) :- man(X),(rich(X);anyWomanLike(X, [анна, мэри])).
-
-whoWomansLike([H|T], X) :- 
-    (anyWomanLike(H, X) -> print(H));
-    whoWomansLike(T, X).
-
-%happy(джон).
-%whoWomansLike([джон, дик], [мэри, анна]).
+%happy(X).
+%womanLike(X, _).
