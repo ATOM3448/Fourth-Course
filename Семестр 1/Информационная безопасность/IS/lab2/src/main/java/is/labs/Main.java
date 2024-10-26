@@ -36,14 +36,12 @@ public class Main {
         AES aes = new AES();
         boolean append = false;
 
-        for (int ind = 0; ind < input.size(); ind += 16) {
+        var inputIterator = input.iterator();
+
+        while (inputIterator.hasNext()) {
             int[] part = new int[16];
-            for (int i = 0; i < 16; i++) {
-                if ((ind + i) >= input.size()) {
-                    part[i] = 0;
-                    continue;
-                }
-                part[i] = input.get(ind + i);
+            for (int i = 0; (i < 16) && inputIterator.hasNext(); i++) {
+                part[i] = inputIterator.next();
             }
 
             int[] encrypted = aes.encrypt(part, key);
