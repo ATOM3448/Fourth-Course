@@ -15,9 +15,6 @@ int main(int argc, char *argv[])
     char processor_name[MPI_MAX_PROCESSOR_NAME];
     MPI_Status stats;
 
-    FILE* myout = fopen("integBcastOut.txt", "w");
-    fclose(myout);
-
     MPI_Init(&argc, &argv);
     MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
     MPI_Comm_rank(MPI_COMM_WORLD, &myid);
@@ -48,21 +45,15 @@ int main(int argc, char *argv[])
                 sum += f(x);
             }
             myfunk = h * sum;
-            
-            myout = fopen("integBcastOut.txt", "a");
-
-            fprintf(myout, "Process %d SUMM %.16f\n", myid, myfunk);
-
-            fclose(myout);
 
             MPI_Reduce(&myfunk, &funk, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
 
             if (myid == 0)
             {
-                FILE* myout = fopen("integBcastOut.txt", "a");
-
-                fprintf(myout, "Integral is approximately  %.16f, Error   %.16f\n", funk, abs(funk - fi(xh) + fi(xl)));
                 endwtime = MPI_Wtime();
+
+                FILE* myout = fopen("integBcastOut.txt", "w");
+                fprintf(myout, "Integral is approximately  %.16f, Error   %.16f\n", funk, abs(funk - fi(xh) + fi(xl)));
                 fprintf(myout, "Time of calculation = %f\n", endwtime - startwtime);
 
                 fclose(myout);
