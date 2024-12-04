@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
 
                 endwtime = MPI_Wtime();
 
-                FILE* myout = fopen("integMyOut.txt", "w");
+                FILE* myout = fopen("../out/integMyOut.txt", "w");
                 fprintf(myout, "Integral is approximately  %.16f, Error   %.16f\n", funk, abs(funk - fi(xh) + fi(xl)));
                 fprintf(myout, "Time of calculation = %f\n", endwtime - startwtime);
 

@@ -1,4 +1,4 @@
 #!/bin/bash
-mpiCC integMy.c -o integMy |
-mpiCC integMy_Bcast.c -o integMyBcast |
-mpiCC integMy_Pack.c -o integMyPack
+mpiCC src/integMy.c -o build/integMy |
+mpiCC src/integMy_Bcast.c -o build/integMyBcast |
+mpiCC src/integMy_Pack.c -o build/integMyPack
