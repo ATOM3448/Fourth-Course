@@ -1,3 +1,4 @@
 Инструменты для работы*
 *.vscode
 *.compile
+*build/
