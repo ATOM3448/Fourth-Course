@@ -1,2 +1,0 @@
-Integral is approximately  0.9162906731134712, Error   0.0000000587606839
-Time of calculation = 0.000005
