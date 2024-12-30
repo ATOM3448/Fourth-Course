@@ -1,60 +1,206 @@
 <mxfile host="65bd71144e">
     <diagram id="7sZPs7zZelK3rAfld-2p" name="Страница 1">
-        <mxGraphModel dx="2427" dy="1163" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="3586" dy="850" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="77" style="edgeStyle=none;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" source="63" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <mxPoint x="-40" y="480" as="targetPoint"/>
+                <mxCell id="130" value="SQL запрос на получение id's трасс,&lt;br&gt;удовлетворяющих фильтрам" style="edgeStyle=none;html=1;entryX=0.155;entryY=-0.01;entryDx=0;entryDy=0;entryPerimeter=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="63" target="82" edge="1">
+                    <mxGeometry x="1" y="-58" relative="1" as="geometry">
                         <Array as="points">
-                            <mxPoint x="160" y="480"/>
-                            <mxPoint x="50" y="480"/>
+                            <mxPoint x="-960" y="760"/>
+                            <mxPoint x="-960" y="778"/>
                         </Array>
+                        <mxPoint x="-2" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="78" value="Text" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=20;fontFamily=Times New Roman;" parent="77" vertex="1" connectable="0">
-                    <mxGeometry x="0.4355" y="4" relative="1" as="geometry">
-                        <mxPoint x="-2" y="-24" as="offset"/>
-                    </mxGeometry>
+                <mxCell id="63" value="1. Фильтрация трасс" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-880" y="720" width="160" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="1. Фильтрация трасс" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="240" width="160" height="80" as="geometry"/>
-                </mxCell>
-                <mxCell id="66" value="Пользователь" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" vertex="1">
-                    <mxGeometry x="360" width="240" height="115" as="geometry"/>
-                </mxCell>
-                <mxCell id="67" value="База&lt;br&gt;данных" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" vertex="1">
-                    <mxGeometry x="-400" y="440" width="360" height="400" as="geometry"/>
-                </mxCell>
-                <mxCell id="69" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=20;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="63" target="63" edge="1">
+                <mxCell id="69" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="63" target="63" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="130" y="290" as="sourcePoint"/>
-                        <mxPoint x="180" y="240" as="targetPoint"/>
+                        <mxPoint x="130" y="330" as="sourcePoint"/>
+                        <mxPoint x="180" y="280" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="70" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=20;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="67" target="67" edge="1">
+                <mxCell id="70" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;exitX=1.001;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.89;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="82" target="82" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="-130" y="210" as="sourcePoint"/>
-                        <mxPoint x="-80" y="160" as="targetPoint"/>
+                        <mxPoint x="-360" y="440" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="72" value="&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;Локальное хранилище&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;текущих id трасс&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;&amp;nbsp;в выборке" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" vertex="1">
-                    <mxGeometry x="-400" y="230" width="360" height="170" as="geometry"/>
-                </mxCell>
-                <mxCell id="73" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=20;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="72" target="72" edge="1">
-                    <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="-30" y="850" as="sourcePoint"/>
-                        <mxPoint x="20" y="800" as="targetPoint"/>
+                <mxCell id="126" value="Параметры фильтров" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="79" target="63" edge="1">
+                    <mxGeometry x="-0.3" y="-30" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-800" y="640"/>
+                        </Array>
+                        <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="75" value="&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;Локальное хранилище&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;данных текущей&lt;br&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#9;&lt;/span&gt;&amp;nbsp;трассы" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=20;" parent="1" vertex="1">
-                    <mxGeometry x="-400" y="880" width="360" height="170" as="geometry"/>
+                <mxCell id="128" value="Класс трассы" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="79" target="117" edge="1">
+                    <mxGeometry x="-0.6315" y="30" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-200" y="640"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
                 </mxCell>
-                <mxCell id="76" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=20;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="1" source="75" target="75" edge="1">
+                <mxCell id="129" value="Номер трассы из выборки" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="79" target="102" edge="1">
+                    <mxGeometry x="0.1408" y="-45" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-440" y="760"/>
+                            <mxPoint x="-520" y="760"/>
+                        </Array>
+                        <mxPoint x="5" y="-20" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="79" value="Пользователь" style="rounded=0;whiteSpace=wrap;html=1;fontSize=18;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-520" y="600" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="144" value="&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Данные о трассе&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=none;fontSize=18;fontColor=default;" edge="1" parent="1" target="142">
+                    <mxGeometry x="-0.341" y="-20" relative="1" as="geometry">
+                        <mxPoint x="-1360" y="800" as="sourcePoint"/>
+                        <mxPoint x="-1560" y="920" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="-1655" y="800"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="147" value="&lt;span style=&quot;font-family: Helvetica; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Id's трасс, подходящие по условию&lt;/span&gt;" style="edgeStyle=none;html=1;fontSize=16;exitX=0.671;exitY=0.998;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=none;" edge="1" parent="1" source="82" target="138">
+                    <mxGeometry x="0.7522" y="-23" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-1500" y="840"/>
+                        </Array>
+                        <mxPoint x="13" y="-22" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="82" value="База данных" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rounded=0;fontSize=18;rotation=90;verticalAlign=middle;textDirection=ltr;horizontal=0;" parent="1" vertex="1">
+                    <mxGeometry x="-1259.5" y="659.5" width="119" height="318.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="84" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;exitX=1.001;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.89;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="85" target="85" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="370" y="830" as="sourcePoint"/>
-                        <mxPoint x="420" y="780" as="targetPoint"/>
+                        <mxPoint x="410" y="290" as="sourcePoint"/>
+                        <mxPoint x="180" y="520" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="135" value="&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Данные по высоте&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;и дальности&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=18;exitX=0.5;exitY=0;exitDx=0;exitDy=0;labelBackgroundColor=none;" parent="1" source="85" target="111" edge="1">
+                    <mxGeometry x="0.1593" y="-30" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-1000" y="1160"/>
+                            <mxPoint x="-1000" y="1040"/>
+                            <mxPoint x="-440" y="1040"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="85" value="&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;Локальное хранилище&lt;/span&gt;&lt;br style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;данных текущей&lt;/span&gt;&lt;br style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;трассы&lt;/span&gt;" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rounded=0;fontSize=18;rotation=90;verticalAlign=middle;textDirection=ltr;horizontal=0;" parent="1" vertex="1">
+                    <mxGeometry x="-1240.5" y="1000.5" width="79.63" height="318.75" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;exitX=1.001;exitY=0.889;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.89;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="89" target="89" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="922.48" y="662.37" as="sourcePoint"/>
+                        <mxPoint x="692.48" y="892.37" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="134" value="Доступные id's" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="89" target="102" edge="1">
+                    <mxGeometry x="0.0023" y="20" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-520" y="1000"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="89" value="&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;Локальное хранилище&lt;/span&gt;&lt;br style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;текущих id трасс&lt;/span&gt;&lt;br style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&lt;/span&gt;&lt;span style=&quot;font-family: &amp;quot;Times New Roman&amp;quot;;&quot;&gt;&amp;nbsp;в выборке&lt;/span&gt;" style="shape=partialRectangle;whiteSpace=wrap;html=1;bottom=1;right=1;left=1;top=0;fillColor=none;routingCenterX=-0.5;rounded=0;fontSize=18;rotation=90;verticalAlign=middle;textDirection=ltr;horizontal=0;" parent="1" vertex="1">
+                    <mxGeometry x="-1240.5" y="840.5" width="80" height="319.44" as="geometry"/>
+                </mxCell>
+                <mxCell id="103" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="102" target="102" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="480" y="330" as="sourcePoint"/>
+                        <mxPoint x="530" y="280" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="137" value="Визуальное представление&lt;br&gt;трассы" style="edgeStyle=none;entryX=0.75;entryY=1;entryDx=0;entryDy=0;fontSize=18;horizontal=0;html=1;verticalAlign=middle;labelBackgroundColor=none;" parent="1" source="111" target="79" edge="1">
+                    <mxGeometry x="-0.2993" y="40" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-320" y="720"/>
+                            <mxPoint x="-400" y="720"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="111" value="5. Отрисовка трассы" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-400" y="1000.22" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="111" target="111" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="830" y="420" as="sourcePoint"/>
+                        <mxPoint x="880" y="370" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="133" value="&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;SQL запрос на обновление класса трасссы&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0.849;entryY=-0.001;entryDx=0;entryDy=0;fontSize=18;entryPerimeter=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;labelBackgroundColor=none;" parent="1" source="117" target="82" edge="1">
+                    <mxGeometry x="-0.2912" y="30" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-920" y="1160"/>
+                            <mxPoint x="-920" y="860"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="117" value="6. Разметка трассы" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-280" y="1119.88" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" parent="1" source="117" target="117" edge="1">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="1110" y="460" as="sourcePoint"/>
+                        <mxPoint x="1160" y="410" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="131" value="&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;SQL запрос на получение данных&lt;br&gt;по указанному id трассы&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;" parent="1" source="102" target="82" edge="1">
+                    <mxGeometry x="-0.5568" y="-40" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-880" y="920"/>
+                            <mxPoint x="-880" y="819"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="102" value="3. Выбор трассы для отображения" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" parent="1" vertex="1">
+                    <mxGeometry x="-600" y="880.5" width="160" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="148" value="&lt;span style=&quot;font-family: Helvetica; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;&lt;font style=&quot;font-size: 18px;&quot;&gt;Id's трасс,&lt;/font&gt;&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontSize=18;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="138" target="89">
+                    <mxGeometry x="0.2016" y="-20" relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="-1500" y="1000"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="138" value="2. Запись из базы id трасс в локальное хранилище" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="-1600" y="860" width="200" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="139" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="138" target="138">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-480" y="240" as="sourcePoint"/>
+                        <mxPoint x="-430" y="190" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="145" value="&lt;span style=&quot;font-family: Helvetica; font-size: 18px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;Данные о трассе&lt;/span&gt;" style="edgeStyle=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=18;exitX=0.5;exitY=1;exitDx=0;exitDy=0;labelBackgroundColor=none;fontColor=default;" edge="1" parent="1" source="142" target="85">
+                    <mxGeometry x="-0.0473" y="-20" relative="1" as="geometry">
+                        <mxPoint x="-1550" y="1020" as="sourcePoint"/>
+                        <Array as="points">
+                            <mxPoint x="-1655" y="1080"/>
+                            <mxPoint x="-1200" y="1080"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" value="4. Запись из базы данных трассы в локальное хранилище" style="rounded=1;whiteSpace=wrap;html=1;fontFamily=Times New Roman;fontSize=18;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="-1780" y="960.22" width="249.5" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="143" value="" style="endArrow=none;html=1;fontFamily=Times New Roman;fontSize=18;entryX=1;entryY=0.25;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="142" target="142">
+                    <mxGeometry width="50" height="50" relative="1" as="geometry">
+                        <mxPoint x="-510" y="110" as="sourcePoint"/>
+                        <mxPoint x="-460" y="60" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
             </root>
